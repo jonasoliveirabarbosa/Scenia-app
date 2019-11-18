@@ -45,17 +45,17 @@ export default class consumptionNow extends Component {
     componentDidMount(){
       try {
           setInterval(async () => {
-            const res = await fetch('http://192.168.15.43:3000/information');
+            const res = await fetch('http://teste-env.n5mm339hk7.us-east-1.elasticbeanstalk.com/api/sensor_informations/1');
             const response = await res.json();
             const requestValues = this.state.dataSource;
             
             let responseWithDate = response;
-            responseWithDate.data.send_at = new Date(response.data.send_at);
-            requestValues.push(responseWithDate.data);
+            responseWithDate.send_at = new Date(response.send_at);
+            requestValues.push(responseWithDate);
             this.setState({
               dataSource: requestValues,
             });
-            decimalCurrentValue = new Decimal(response.data.value);
+            decimalCurrentValue = new Decimal(response.value);
             
             this.setState({
                 totalConsumption: (decimalCurrentValue.add(new Decimal(this.state.totalConsumption)))
