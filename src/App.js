@@ -4,6 +4,7 @@ import { View, Image, Dimensions } from 'react-native';
 import {
  createAppContainer,
  createDrawerNavigator,
+ createSwitchNavigator,
  DrawerItems,
 } from 'react-navigation';
 
@@ -14,6 +15,7 @@ import ComsumptionNow from './drawer/consumption_now';
 import ComsumptionMonth from './drawer/consumption_month';
 import ComsumptionTotal from './drawer/consumption_total';
 import vectorFonts from './helpers/vector-fonts';
+import Login from './views/login';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -34,7 +36,12 @@ const CustomDrawerContentComponent = props => (
  </View>
 );
 
+
 const MainRoot = createAppContainer(
+  createSwitchNavigator({
+    Login,
+    ComsumptionNow,
+  }),
  createDrawerNavigator(
    {
      ComsumptionNow: {
